@@ -10,6 +10,7 @@ public class NumSquares {
 		System.err.println();
 		System.err.println();
 		System.err.println();
+		System.err.println();
 
 	}
 
