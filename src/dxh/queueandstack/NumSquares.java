@@ -6,7 +6,10 @@ public class NumSquares {
 		// TODO Auto-generated method stub
 		System.err.println();
 		System.err.println();
-		
+		System.err.println();
+		System.err.println();
+		System.err.println();
+		System.err.println();
 
 	}
 
