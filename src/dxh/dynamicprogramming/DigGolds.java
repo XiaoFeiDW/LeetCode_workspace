@@ -36,13 +36,6 @@ public class DigGolds {
 	//动态规划：n金矿的数量，p工人的数量，golds为金矿量的数组，people为每个金矿需要工人的数组
 	public static int getBestWaysByDP(int n, int p, int[] golds, int[] people) {
 		
-		if(n <= 1 || p < people[0]) {
-			return 0;
-		}
-		if(n == 1 && p >= people[0]) {
-			return golds[0];
-		}
-		
 		int[] firstResult = new int[p];
 		int[] result = new int[p];
 		
