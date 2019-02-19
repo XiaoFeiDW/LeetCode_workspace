@@ -22,73 +22,56 @@ class ListNode {
 public class T2{
 	
 	public static void main(String[] args) {
-		ListNodeTest listNodeTest1 = new ListNodeTest();
-		listNodeTest1.addNode(2);
-		listNodeTest1.addNode(4);
-		listNodeTest1.addNode(3);
-		listNodeTest1.addNode(5);
+		//创建两个链表
+		//第一个链表2 -> 4 -> 3
+		ListNode l1 = new ListNode(2);
+		ListNode p = l1;   //用p代替l1去赋值，一定不要用头结点l1自己去遍历，否则就找不到链表头了
+		p.next = new ListNode(4);
+		p = p.next;
+		p.next = new ListNode(3);
 		
-		ListNode l1 = listNodeTest1.head;
-	
-		ListNodeTest listNodeTest2 = new ListNodeTest();
-		listNodeTest2.addNode(5);
-		listNodeTest2.addNode(6);
-		ListNode l2 = listNodeTest2.head;
+		//第二个链表5 -> 6 -> 4
+		ListNode l2 = new ListNode(5);
+		ListNode q = l2;
+		q.next = new ListNode(6);
+		q = q.next;
+		q.next = new ListNode(4);
 		
-		ListNode l3 = addTwoNumbers(l1, l2);
-		while(l1 != null) {
-			System.out.print(l1.val + " ");
-			l1 = l1.next;
+		ListNode list = addTwoNumbers(l1, l2);
+		ListNode temp = list;
+		while(temp != null) {
+			System.out.println(temp.val);
+			temp = temp.next;
 		}
-		System.err.println();
-		
 		
 		
 	}
 
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		
-		ListNode dummyHead = new ListNode(0);
-		ListNode p = l1, q = l2, curr = dummyHead;
-		int carry = 0;
+		ListNode dummyHead = new ListNode(0); //新定义一个链表来存储计算的结果
+		ListNode p = l1;
+		ListNode q = l2;
+		ListNode curr = dummyHead;
+		int carry = 0;   //进位
 		while(p != null || q != null) {
-			int x = (p != null) ? p.val : 0;
+			int x = (p != null) ? p.val : 0;  //若节点为空，默认为0
 			int y = (q != null) ? q.val : 0;
 			int sum = carry + x + y;
-			carry = sum / 10;
-			curr.next = new ListNode(sum % 10);
+			carry = sum / 10;  //更新进位
+			curr.next = new ListNode(sum % 10);  //更新节点
 			curr = curr.next;     //将当前节点进位到下一个节点
-			if(p != null) p = p.next;
+			if(p != null) p = p.next;  //继续对链表l1、l2遍历下一个节点
 			if(q != null) q = q.next;
 			
 		} 
+		//如果最终有进位，则生成一个新结点以保存最高位的进位
 		if(carry > 0) {
 			curr.next = new ListNode(carry);
 		}
 		
 		return dummyHead.next;
 	
-	}
-	
-}
-class ListNodeTest{
-	static ListNode head = null;
-	public void addNode(int num) {
-		
-		ListNode temp = null;
-		
-		ListNode node = new ListNode(num);
-		
-		if(head == null) {
-			head = node;
-			return;
-		}
-		temp = head;
-		while(temp.next != null) {
-			temp = temp.next;
-		}
-		
-		temp.next = node;
 	}
 	
 }
