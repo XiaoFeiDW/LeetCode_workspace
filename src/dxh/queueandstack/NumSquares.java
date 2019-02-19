@@ -16,9 +16,18 @@ public class NumSquares {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
 		for(int i = 1; i < 10; i++) {
 			System.err.println(numSquares(i));
 		}
+
+		System.err.println();
+		System.err.println();
+		System.err.println();
+		System.err.println();
+		System.err.println();
+		System.err.println();
+
 
 	}
 	
