@@ -21,20 +21,40 @@ public class T5 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		String s = "baabad";
+		String str = longestPalindrome(s);
+		
+		System.err.println(str);
 	}
 	
 	//寻找最长回文子串
-	public String longestPalindrome(String s) {
+	public static String longestPalindrome(String s) {
 		
-		List<String> strList = new ArrayList<>(); 
-		
+		if(s.length() < 2) {
+			return s;
+		}
+		int start = 0, end = 0;
 		for(int i = 0; i < s.length(); i++) {
-			if(s.charAt(i + 1) == s.charAt(i-1)) {
-				
+			int len1 = getLength(s, i, i);
+			int len2 = getLength(s, i, i + 1); //回文子串个数为偶数
+			int len = Math.max(len1, len2);
+			if(len > end - start) {
+				start = i - (len - 1) / 2;
+				end = start + len - 1;
 			}
 		}
-		
-		return "";
+		return s.substring(start, end + 1);
 	}
-
+	
+	public static int getLength(String s, int i, int j) {
+		
+		while(i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+			
+			i--;
+			j++;
+		}
+		return j - i - 1;
+	}
+	
+	
 }
