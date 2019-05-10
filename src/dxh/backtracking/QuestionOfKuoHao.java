@@ -1,4 +1,4 @@
-	package backtracking;
+	package dxh.backtracking;
 
 import java.util.ArrayList;
 /*»ØËİËã·¨£º

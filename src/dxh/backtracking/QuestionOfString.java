@@ -1,4 +1,4 @@
-package backtracking;
+package dxh.backtracking;
 /*给出一个字符串，求出其所有的排列*/
 public class QuestionOfString {
 
