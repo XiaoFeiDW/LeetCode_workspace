@@ -26,32 +26,47 @@ public class T25 {
 		q.next = new ListNode(5);
 		
 		
-		ListNode head1 = reverseKGroup(head, 5);
-		while(head1 != null) {
-			System.err.println(2);
-			head1 = head1.next;
+		ListNode head1 = reverseKGroup(head, 3);
+		ListNode temp = head1;
+		while(temp != null) {
+			System.out.println(temp.val);
+			temp = temp.next;
 		}
+		
 	}
 	
 	public static ListNode reverseKGroup(ListNode head, int k) {
 		
-		Stack<ListNode> stack = new Stack<>();
-		
-		if(k == 1) {
-			return head;
-		}
-		
-		ListNode p = head;
-		ListNode dummyHead = new ListNode(1);
-		ListNode q = dummyHead;
-		while(k > 0) {
-			stack.push(p);
-			p = p.next;
-			k--;
-		}
-		
-		
-		return dummyHead.next;
+		 	ListNode checked = head;
+	     	ListNode cur = head;
+	     	ListNode curNext = null;
+	        ListNode temp = null;
+	        
+	        int j = 0;
+	        int i = 0;
+	        
+	        //首先判断链表长度能否翻转
+	        while(checked != null && k > j){
+	            checked = checked.next;
+	            j++;
+	        }
+	        
+	        //满足条件  进行翻转
+	        if(j == k){
+	            while(cur != null && k > i){
+	                curNext = cur.next;
+	                cur.next = temp;   //使用temp作为链表翻转后的头结点
+	                temp = cur;
+	                cur = curNext;
+	                i++;
+	            }
+	            
+	            if(curNext != null){
+	                head.next = reverseKGroup(curNext, k);  //head为链表翻转后的尾结点
+	            }
+	            return temp;
+	        }
+	    
+	        return head;
 	}
-
 }

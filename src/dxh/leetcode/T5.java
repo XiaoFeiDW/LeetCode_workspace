@@ -21,13 +21,13 @@ public class T5 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String s = "baabad";
+		String s = "bb";
 		String str = longestPalindrome(s);
-		
+//		int len = getLength(s, 3, 3);
 		System.err.println(str);
 	}
 	
-	//寻找最长回文子串
+	//使用中心扩散法寻找最长回文子串
 	public static String longestPalindrome(String s) {
 		
 		if(s.length() < 2) {
@@ -35,7 +35,7 @@ public class T5 {
 		}
 		int start = 0, end = 0;
 		for(int i = 0; i < s.length(); i++) {
-			int len1 = getLength(s, i, i);
+			int len1 = getLength(s, i, i);      
 			int len2 = getLength(s, i, i + 1); //回文子串个数为偶数
 			int len = Math.max(len1, len2);
 			if(len > end - start) {
@@ -53,8 +53,12 @@ public class T5 {
 			i--;
 			j++;
 		}
+		
 		return j - i - 1;
 	}
+	
+	
+	
 	
 	
 }

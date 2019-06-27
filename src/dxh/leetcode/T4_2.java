@@ -1,27 +1,43 @@
 package dxh.leetcode;
-
+import java.util.*;
 public class T4_2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int[] A = {1,2,3,4,5,6};
-		int[] B = {3,6,7,8};
-		double num = findMedianSortedArrays(A, B);
-		System.err.println(num);
+		int[] A = {};
+		int[] B = {3};
+//		int m = A.length;
+//		int n = B.length;
+//		
+//		A = Arrays.copyOf(A, m + n);
 		
+		double num = findMedianSortedArrays(A, B);
+//		for(int num : A) {
+//			System.err.println(num);
+//		}
+//		
+		System.out.println(num);
 	}
-	
+	 
+	//分治算法   时间复杂度O(log(m+n))
 	public static double findMedianSortedArrays(int[] A, int[] B) {
 		
 		int m = A.length;
 		int n = B.length;
+		
+		if(m ==0 && n == 1){
+            return B[0] / 1.0;
+        }
+         if(m ==1 && n == 0){
+            return A[0] / 1.0;
+        }
 		if(m > n) {    //确保n>=m
 			int[] temp = A; A = B; B = temp;
 			int tmp = m; m = n; n = tmp;
 		}
-		//在A、B中各找第i、j位置，使得A[0]-A[i-1] 和 B[0]-B[j-1]和B[0 - j-1]中最大的数小于A[i]-A[m-1] 和 B[j]-B[n-1]中最小的数
-		//则有i+j=m-i+n-j(m-i+n-j+1) 又0<=i<=m,所以j=(m+n+1)/2-i,为保证j>0,所以n>=m
+		//在A、B中各找第i、j位置，使得A[0]-A[i-1] 和 B[0]-B[j-1]中最大的数小于A[i]-A[m-1] 和 B[j]-B[n-1]中最小的数
+		//因为查找的是排序数组的中位数，所以有i+j=m-i+n-j  (或者m-i+n-j+1)，如果n>=m ,又0<=i<=m,所以j=(m+n+1)/2-i,为保证j>0,所以n>=m
 		//左边为A[0]-A[i-1] + B[0]-B[j-1]  右边为A[i]-A[m-1] + B[j]-B[n-1]
 		int iMin = 0, iMax = m;  //i的范围为0~m  
 		int halfLen = (m + n + 1) / 2;
@@ -63,6 +79,32 @@ public class T4_2 {
 		}
 		
 		return 0.0;
+	}
+	
+	
+	//常规方法  将一个数组合并到另一个数组  时间复杂度O(m+n)  16ms
+	public static double findMedianSortedArrays1(int[] A, int[] B) {
+		
+		int m = A.length;
+		int n = B.length;
+		
+		
+		//System.arraycopy(src, srcPos, dest, destPos, length)  
+		//src为原数组，srcPos为从原数组的起始位置开始，dest为目标数组，destPos为目标数组的开始起始位置，length为要copy的数组的长度
+		A = Arrays.copyOf(A, m + n);  //对数组A进行扩容，使其能够存下A、B的数
+		System.arraycopy(B, 0, A, m, n);  //将数组B的数据拷入A数组内
+		Arrays.sort(A);           //对数组A进行排序
+		for(int n1:A) {
+			System.out.println(n1);
+		}
+		int len = m + n;
+		int mid = len / 2;
+		
+		if(len % 2 == 0) {
+			return (A[mid] + A[mid - 1]) / 2.0;
+		}
+		
+		return (double)A[mid];
 	}
 
 }

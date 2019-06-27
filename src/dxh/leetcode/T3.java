@@ -1,4 +1,6 @@
 package dxh.leetcode;
+
+import java.util.*;
 /*
  * 给定一个字符串，找出不含有重复字符的最长子串的长度
  *
@@ -64,4 +66,22 @@ public class T3 {
 		
 	}
 
+	public static int lengthOfLongestSubString1(String s) {
+		
+		 Set<Character> strSet = new HashSet<>();  //set是无重复的集合
+		 int i = 0, j = 0, len = 0;
+		 
+		 while(i < s.length() && j < s.length()) {
+			 if(!strSet.contains(s.charAt(i))) {
+				 strSet.add(s.charAt(i));
+				 i++;
+				 len = Math.max(len, i - j);  //只保留每次比较的字符串中长度最长的那个
+			 }else {                          //当集合内存在相同的元素时，i不动，j++，直到集合内相同的元素删除完
+				 strSet.remove(s.charAt(j));
+				 j++;
+			 }
+		 }
+		
+		 return len;
+	}
 }

@@ -25,6 +25,11 @@ public class T1 {
 		for(int num : count) {
 			System.out.print(num + " ");
 		}
+		
+//		ListNode l = new ListNode(0);
+////		System.out.println(l.val);
+//		l.val = 2;
+//		System.err.println(l.val);
 	}
 	
 	/*//自己书写， 暴力法解决 ，时间复杂度：O(n^2)   空间复杂度O(1)
@@ -52,18 +57,18 @@ public class T1 {
 	 * 时间复杂度：O(n)   空间复杂度：O(n)
 	 * */
 	public static int[] twoSum(int[] nums, int target) {
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		for(int i = 0; i < nums.length; i++) {
-			map.put(i, nums[i]);
-		}
-		
-		for(int i = 0; i < nums.length; i++) {
-			int complement = target - nums[i];
-			if(map.containsKey(complement) && map.get(complement) != i) {
-				return new int[] {i, map.get(complement)};
-			}
-		}
-	    throw new IllegalArgumentException("No two sum solution");
+		Map<Integer, Integer> numsMap = new HashMap<Integer, Integer>();
+        for(int i = 0; i < nums.length; i++){
+            numsMap.put(nums[i], i);
+        }
+        
+        for(int i = 0; i < nums.length; i++){
+            int num = target - nums[i];
+            if(numsMap.containsKey(num) && numsMap.get(num) != i){
+                return new int[]{i, numsMap.get(num)};
+            }
+        }
+	    return null ;
 		
 	}
 	
